@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" href="styles/style-custom-gonzahar.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Order</title>
+    </head>
+
+    <header>
+        <h1>Harley's Byte Bistro</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a class="active" href="order.html">Order</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+    <h2>Place Your Order</h2>
+        <form method="post" action="order.php">
+            <fieldset>
+                <legend>Customer Info</legend>
+
+                <label>Full Name:</label>
+                <input name="name" placeholder="Jane Doe" required>
+
+                <label>Phone Number:</label>
+                <input name="phone" placeholder="541-123-4567">
+            </fieldset>
+
+            <fieldset>
+                <legend>Food Order</legend>
+                <label>Entrée</label>
+                <select name="entree" required>
+                    <option value="" disabled selected> -- Choose Your Entrée -- </option>
+                    <option value="Hot Dog">Hot Dog</option>
+                    <option value="Hamburger">Hamburger</option>
+                    <option value="Chicken Sandwich">Chicken Sandwich</option>
+                </select>
+                
+                <label>Beverage:</label>
+                <select name="beverage" required>
+                    <option value="" disabled selected> -- Choose Your Beverage -- </option>
+                    <option value="Fountain Drink">Fountain Drink</option>
+                    <option value="OrangeJuice">Orange Juice</option>
+                    <option value="Coffee">Coffee</option>
+                </select>
+
+                <label>Dessert:</label>
+                <select name="dessert" required>
+                    <option value="" disabled selected> -- Choose Your Dessert -- </option>
+                    <option value="Chocolate Cake">Chocolate Cake</option>
+                    <option value="Fruit Cup">Fruit Cup</option>
+                </select>
+
+                <p>Add-ons:</p>
+                <label> <input type="checkbox" name="addons[]" value="Ketchup"> Ketchup </label>
+                <label> <input type="checkbox" name="addons[]" value="Mustard"> Mustard </label>
+                <label> <input type="checkbox" name="addons[]" value="Creamer"> Creamer </label>
+                <label> <input type="checkbox" name="addons[]" value="Sugar"> Sugar </label>
+
+                <label>Total: (non-functional for now)</label>
+                <input type="text" name="total" value="$0.00">
+            </fieldset>
+
+            <fieldset>
+                <legend>Dining Preferences</legend>
+                <p>Dining Method:</p>
+                <label> <input type="radio" name="dining"  value="Pickup"> Pick-Up </label>
+                <label> <input type="radio" name="dining"  value="Delivery"> Delivery </label>
+                <label> <input type="radio" name="dining"  value="Eat-in"> Eat-In </label>
+
+                <label>Pick-up/Delivery Time:</label>
+                <input type="time" name="time" required>
+
+                <label>Special Instructions:</label>
+                <textarea name="instructions" placeholder="e.g., address or table number"></textarea>
+            
+            </fieldset>
+            <input type="submit">
+        </form>
+
+        <footer>
+            <p>Phone: 1-(800)-222-3333 |
+            Email: bytes.bistro@oregonstate.edu |
+            &copy; Harley Gonzales, 2025 |
+            Created by: Harley Gonzales
+            </p>
+        </footer>
+    </main>
+</html>

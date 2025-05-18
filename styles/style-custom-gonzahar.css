@@ -1,0 +1,139 @@
+#entree-table {
+    border: 10px solid #DF7309;
+    padding: 20px;
+}
+  
+#beverage-table {
+    border: 10px solid #DF7309;
+    padding: 20px;
+}
+  
+#dessert-table {
+    border: 10px solid #DF7309;
+    padding: 20px;
+}
+.dessert-img {
+    width: 1080px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+fieldset {
+    border: 2px solid #DF7309;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+legend {
+    font-weight: bold;
+    color: #000;
+}
+
+input[type="text"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #DF7309;
+}
+  
+nav li {
+    float: left;
+}
+  
+nav li a {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+}
+  
+nav li a:hover:not(.active) {
+    background-color: white ;
+}
+  
+nav li a.active {
+    color: white;
+    background-color: #DF7309;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* The main container that holds both the hours section and the map section side by side */
+.info-container {
+    display: flex;
+    gap: 10rem;
+    align-items: flex-start;
+  } 
+  
+  /* The left column (Hours & Delivery info) */ 
+  .hours-display {
+    flex: 1;
+    padding: 0rem;
+  } 
+  
+  /* The right column (Map + controls) */
+  .map-display {
+    flex: 2;
+  }
+  
+  
+  /* Hide all map boxes by default */
+  .city1-box, .city2-box, .city3-box {
+    display: none;
+  }
+  
+  /* Show the selected city */
+  #city-city1:checked ~ .city1-box,
+  #city-city2:checked ~ .city2-box,
+  #city-city3:checked ~ .city3-box {
+    display: block;
+  }
+  
+  /* ⚠️ IMPORTANT: For this to work, the <input> and .map-box must be siblings
+     inside the same container (.map-display) — not nested in another div. */
+  
+  /* Makes map images responsive and clean */
+   .city-map {
+    width: 100%;
+    max-width: 1080px;
+    border-radius: 0px;
+    transition: transform 0.3s ease;
+  }
+  
+  .city-map:hover {
+    transform: scale(1.05);
+  }
+  
+  .map-box {
+    border: 1px solid #DF7309;
+    padding: 1rem;
+    margin-top: 0rem;
+    background-color: lightsalmon;
+    border-radius: 10px;
+  }
+  
+  /* Styles each radio button and its label inline */
+  .map-display label {
+    margin-right: 1rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .review-stars {
+    font-size: 2em;
+    color: goldenrod;
+    letter-spacing: 0em;
+  }
+
+  .map-label {
+    font-size: 1.5em;
+    color: blue;
+    margin-left: 7rem;
