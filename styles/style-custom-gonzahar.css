@@ -81,31 +81,33 @@ nav li a.active {
   
   /* The right column (Map + controls) */
   .map-display {
-    flex: 2;
+    flex: 1;
   }
   
   
-  /* Hide all map boxes by default */
+  /* Hide all map boxes by default
   .city1-box, .city2-box, .city3-box {
     display: none;
-  }
+  } */
   
-  /* Show the selected city */
+  /* Removed the following for Activity 12:
+  /* Show the selected city
   #city-city1:checked ~ .city1-box,
   #city-city2:checked ~ .city2-box,
   #city-city3:checked ~ .city3-box {
     display: block;
-  }
+  } */
   
   /* ⚠️ IMPORTANT: For this to work, the <input> and .map-box must be siblings
      inside the same container (.map-display) — not nested in another div. */
   
   /* Makes map images responsive and clean */
    .city-map {
-    width: 100%;
+    width: 70%;
     max-width: 1080px;
     border-radius: 0px;
     transition: transform 0.3s ease;
+    margin-left: 6rem;
   }
   
   .city-map:hover {
@@ -116,7 +118,7 @@ nav li a.active {
     border: 1px solid #DF7309;
     padding: 1rem;
     margin-top: 0rem;
-    background-color: lightsalmon;
+    background-color: #DF7309;
     border-radius: 10px;
   }
   
@@ -137,3 +139,4 @@ nav li a.active {
     font-size: 1.5em;
     color: blue;
     margin-left: 7rem;
+  }

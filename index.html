@@ -3,8 +3,10 @@
     <head>
         <link rel="stylesheet" href="styles/style.css">
         <link rel="stylesheet" href="styles/style-custom-gonzahar.css">
+        <link rel="stylesheet" href="styles/weather-map-style.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="weather-time.js" defer></script>
         <title>Harley's Byte Bistro</title>
     </head>
 
@@ -40,44 +42,34 @@
                 <li><strong>Saturday: Closed</strong></li>
                 <li><strong>Sunday: Closed</strong></li>
               </ul>
+
+              <div class="weather-display">
+                  <h3>Current Conditions</h3>
+                  <img id="weather-icon" src="images/weather.png" alt="Weather Icon">
+                  <span id="temperature">72°F</span>
+                  <div id="patio-status">🌞 Patio is open!</div>
+              </div>
             </div>
-          
+
             <div class="map-display">
                 <h3>Locations:</h3>
-               <input type="radio" name="city" id="city-city1" checked>
+               <input type="radio" name="city" id="city1" checked>
                 <label for="city-city1">Las Vegas</label>
           
-              <input type="radio" name="city" id="city-city2">
+              <input type="radio" name="city" id="city2">
                 <label for="city-city2">Orlando</label>
           
-              <input type="radio" name="city" id="city-city3">
+              <input type="radio" name="city" id="city3">
                 <label for="city-city3">New York</label>
-          
-              <div class="map-box city1-box">
-                <div class="map-label">123 Las Vegas Blvd, Las Vegas, NV</div>
-                <a href="https://www.google.com/maps/d/u/0/edit?mid=1yBXtKtaFSA9NB3iFDm4-64s1uQtFX4o&usp=sharing" target="_blank">
-                  <img src="images/map-city1.jpg" 
-                     alt="Map of Las Vegas" title = "Click to see map of Las Vegas" class="city-map">
+              <div class="map-box">
+                <div class="map-label" id="map-address">123 Las Vegas Blvd, Las Vegas, NV</div>
+                <a id="map-link" href="#" target="_blank">
+                  <img id="map-image" src="images/map-city1.jpg" alt="Map" class="city-map">
                 </a>
-              </div>
-          
-              <div class="map-box city2-box">
-                <div class="map-label">123 Tech Street, Orlando, FL</div>
-                <a href="https://www.google.com/maps/d/u/0/edit?mid=1Po55h8CN_k4vUWj1bfLOp2aQGLu-xig&usp=sharing" target="_blank">
-                  <img src="images/map-city2.jpg" 
-                     alt="Map of Orlando" title = "Click to see map of Orlando" class="city-map">
-                </a>
-              </div>
-
-              <div class="map-box city3-box">
-                <div class="map-label">1234 Fifth Ave, New York, NY</div>
-                <a href="https://www.google.com/maps/d/u/0/edit?mid=1lK2m5hDNvv1Lnbfwk0_jm_eJhUbOjGw&usp=sharing" target="_blank">
-                  <img src="images/map-city3.jpg" 
-                     alt="Map of New York" title = "Click to see map of New York" class="city-map">
-                </a>
-              </div>
-          
+              </div>          
             </div>
+
+            
           </div>
     </main>
 
