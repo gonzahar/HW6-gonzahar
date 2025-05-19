@@ -43,16 +43,22 @@ function updateMap(city) {
 }
 
 function fetchWeatherAndTime(city) {
-    const apiUrl = weatherApiuRLS[city];
-    fetch(aprUrl)
+    const cityWeather = {
+        city1: "https://api.open-meteo.com/v1/forecast?latitude=36.175&longitude=-115.1372&current=temperature_2m,weather_code,is_day&timezone=America%2FLos_Angeles&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch",
+        city2: "https://api.open-meteo.com/v1/forecast?latitude=28.5383&longitude=-81.3792&current=temperature_2m,weather_code,is_day&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch",
+        city3: "https://api.open-meteo.com/v1/forecast?latitude=40.7143&longitude=-74.006&current=temperature_2m,weather_code,is_day&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch"
+    };
+
+    const apiUrl = cityWeather[city];
+    fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
             const current = data.current;
             const temp = Math.round(current.temperature_2m);
-            const weatherCode = current.weatherCode;
+            const weatherCode = current.weather_code;
             const timeZone = current.timeZone;
 
-            const locatTime = new Date().toLocaleTimeString('en-US', {
+            const localTime = new Date().toLocaleTimeString('en-US', {
                 hour: '2-digit', minute: '2-digit', hour12: true, timeZone: timeZone
             });
            
@@ -60,6 +66,7 @@ function fetchWeatherAndTime(city) {
             showImage("weather-icon", weatherCode, localTime);
             updatePatioStatus(temp, weatherCode);
         });
+
 }
 
 function updatePatioStatus(temp, weatherCode) {
@@ -75,7 +82,7 @@ function updatePatioStatus(temp, weatherCode) {
 }
 
 // Determine Day/Night Icon
-function showImage(elementID, weatherCode, localTimeStr) {
+function showImage(elementID, weather_code, localTimeStr) {
     const [time, ampm] = localTimeStr.split(' ');
     const [hourStr] = time.split(':');
     let hour = parseInt(hourStr);
@@ -90,10 +97,19 @@ function showImage(elementID, weatherCode, localTimeStr) {
     const isDayTime = hour >= 6 && hour < 20;
     
     const weatherImages = {
-        Clear: isDayTime ? "images/clear-day.png" : "images/clear-night.png",
-        PartlyCloudy: isDayTime ? "images/partly-cloudy-day.png" : "images/partly-cloudy-night.png",
-        Rainy: isDayTime ? "images/rainy-day.png" : "images/rainy-night.png",
+        0: isDayTime ? "images/clear-day.png" : "images/clear-night.png",
+        2: isDayTime ? "images/partly-cloudy-day.png" : "images/partly-cloudy-night.png",
+        61: isDayTime ? "images/rainy-day.png" : "images/rainy-night.png",
     }
-    // const img = //  LOCATION OF YOUR IMAGE
-    // img.src = // CHANGE YOUR WEATHER IMAGE
+    const img = document.getElementById("weather-icon");
+    img.src = weatherImages;
+}
+
+// TODO Update business hours based on the selected city
+function updateHours(city) {
+    const hours = {
+        city1: "Mon-Fri: 10am - 10pm, Sat-Sun: 10am - 11pm",
+        city2: "Mon-Fri: 11am - 9pm, Sat-Sun: 11am - 10pm",
+        city3: "Mon-Fri: 12pm - 8pm, Sat-Sun: Closed"
+    };
 }

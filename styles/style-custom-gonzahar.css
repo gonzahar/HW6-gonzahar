@@ -69,7 +69,6 @@ nav li a.active {
 /* The main container that holds both the hours section and the map section side by side */
 .info-container {
     display: flex;
-    gap: 10rem;
     align-items: flex-start;
   } 
   
@@ -81,7 +80,7 @@ nav li a.active {
   
   /* The right column (Map + controls) */
   .map-display {
-    flex: 1;
+    flex: 2;
   }
   
   
@@ -103,11 +102,11 @@ nav li a.active {
   
   /* Makes map images responsive and clean */
    .city-map {
-    width: 70%;
+    width: 80%;
     max-width: 1080px;
     border-radius: 0px;
     transition: transform 0.3s ease;
-    margin-left: 6rem;
+    margin-left: 2.75rem;
   }
   
   .city-map:hover {
@@ -120,6 +119,7 @@ nav li a.active {
     margin-top: 0rem;
     background-color: #DF7309;
     border-radius: 10px;
+    margin-right: 30rem;
   }
   
   /* Styles each radio button and its label inline */
@@ -138,5 +138,5 @@ nav li a.active {
   .map-label {
     font-size: 1.5em;
     color: blue;
-    margin-left: 7rem;
+    margin-left: 2rem;
   }
