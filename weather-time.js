@@ -73,15 +73,16 @@ function fetchWeatherAndTime(city) {
            
             document.getElementById("temperature").innerText = `Current Temp: ${temp}°F`;
             showImage("weather-icon", weatherCode, localTime);
-            updatePatioStatus(temp, weatherCode);
-            bistroStatus(localTime, city, cityName);      
+            bistroStatus(localTime, city, cityName);
+            updatePatioStatus(temp, weatherCode, localTime);
+                  
         });
 
 };
 
-function updatePatioStatus(temp, weatherCode) {
+function updatePatioStatus(temp, weatherCode, localTime) {
     const patioElement = document.getElementById("patio-status");
-    if(temp < 55 || temp > 95 || weatherCode >= 55) {
+    if(temp < 55 || temp > 95 || weatherCode >= 48 || localTime < "08:00 AM" || localTime > "04:00 PM") {
         patioElement.innerText = "Patio is CLOSED! ❌";
         patioElement.style.color = "red";
         patioElement.style.fontWeight = "bold";
@@ -128,18 +129,11 @@ function showImage(elementID, weather_code, localTimeStr) {
 // TODO Update business hours based on the selected city
 function updateHours(city) { 
     const openHours = {
-        city1: "Open: Monday-Friday: 8am-5pm",
-        city2: "Open: Tuesday-Saturday: 9am-4pm",
-        city3: "Open: Wednesday-Sunday: 10am-6pm"
+        city1: "Open Daily from 8am-5pm!",
+        city2: "Open Daily from 9am-4pm!",
+        city3: "Open Daily from 10am-6pm!"
     }
-    const closedHours = {
-        city1: "Closed: Saturday-Sunday",
-        city2: "Closed: Sunday-Monday",
-        city3: "Closed: Monday-Tuesday"
-    }
-
     document.getElementById("open").innerText = openHours[city];
-    document.getElementById("closed").innerText = closedHours[city];
 };
 
 function bistroStatus(localTime, city, cityName) {
