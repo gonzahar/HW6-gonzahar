@@ -14,7 +14,7 @@ function updateCityInfo() {
 
     // TODO: Fetch and display weather and time information for the selected city
     fetchWeatherAndTime(selectedCity);
-}
+};
 
 function updateMap(city) {
     const mapImages = {
@@ -40,7 +40,7 @@ function updateMap(city) {
     document.getElementById("map-image").alt = `Map of ${city}`;
     document.getElementById("map-link").href = mapLinks[city];
     document.getElementById("map-address").innerText = addresses[city];
-}
+};
 
 function fetchWeatherAndTime(city) {
     const cityWeather = {
@@ -48,7 +48,16 @@ function fetchWeatherAndTime(city) {
         city2: "https://api.open-meteo.com/v1/forecast?latitude=28.5383&longitude=-81.3792&current=temperature_2m,weather_code,is_day&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch",
         city3: "https://api.open-meteo.com/v1/forecast?latitude=40.7143&longitude=-74.006&current=temperature_2m,weather_code,is_day&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch"
     };
-
+    const cityName = {
+        city1: "Las Vegas",
+        city2: "Orlando",
+        city3: "New York"
+    };
+    const cityTimeZones = {
+        city1: "America/Los_Angeles",
+        city2: "America/New_York",
+        city3: "America/New_York"
+    };
     const apiUrl = cityWeather[city];
     fetch(apiUrl)
         .then(response => response.json())
@@ -56,30 +65,33 @@ function fetchWeatherAndTime(city) {
             const current = data.current;
             const temp = Math.round(current.temperature_2m);
             const weatherCode = current.weather_code;
-            const timeZone = current.timeZone;
+            const timeZone = cityTimeZones[city];
 
             const localTime = new Date().toLocaleTimeString('en-US', {
                 hour: '2-digit', minute: '2-digit', hour12: true, timeZone: timeZone
             });
            
-            document.getElementById("temperature").innerText = `${temp}°F`;
+            document.getElementById("temperature").innerText = `Current Temp: ${temp}°F`;
             showImage("weather-icon", weatherCode, localTime);
             updatePatioStatus(temp, weatherCode);
+            bistroStatus(localTime, city, cityName);      
         });
 
-}
+};
 
 function updatePatioStatus(temp, weatherCode) {
     const patioElement = document.getElementById("patio-status");
     if(temp < 55 || temp > 95 || weatherCode >= 55) {
-        patioElement.innerText = "Patio is CLOSED!";
+        patioElement.innerText = "Patio is CLOSED! ❌";
         patioElement.style.color = "red";
+        patioElement.style.fontWeight = "bold";
     }
     else {
-        patioElement.innerText = "Patio is OPEN!";
+        patioElement.innerText = "Patio is OPEN! ✅";
         patioElement.style.color = "green";
+        patioElement.style.fontWeight = "bold";
     }
-}
+};
 
 // Determine Day/Night Icon
 function showImage(elementID, weather_code, localTimeStr) {
@@ -97,19 +109,59 @@ function showImage(elementID, weather_code, localTimeStr) {
     const isDayTime = hour >= 6 && hour < 20;
     
     const weatherImages = {
-        0: isDayTime ? "images/clear-day.png" : "images/clear-night.png",
-        2: isDayTime ? "images/partly-cloudy-day.png" : "images/partly-cloudy-night.png",
-        61: isDayTime ? "images/rainy-day.png" : "images/rainy-night.png",
+        Clear: isDayTime ? "images/clear-day.png" : "images/clear-night.png",
+        Cloudy: isDayTime ? "images/partly-cloudy-day.png" : "images/partly-cloudy-night.png",
+        Rainy: isDayTime ? "images/rainy-day.png" : "images/rainy-night.png",
     }
     const img = document.getElementById("weather-icon");
-    img.src = weatherImages;
-}
+    if(weather_code === 0) {
+        img.src = weatherImages.Clear;
+    }
+    else if(weather_code > 0 && weather_code <= 48 ) {
+        img.src = weatherImages.Cloudy;
+    }
+    else {
+        img.src = weatherImages.Rainy;
+    }
+};
 
 // TODO Update business hours based on the selected city
-function updateHours(city) {
-    const hours = {
-        city1: "Mon-Fri: 10am - 10pm, Sat-Sun: 10am - 11pm",
-        city2: "Mon-Fri: 11am - 9pm, Sat-Sun: 11am - 10pm",
-        city3: "Mon-Fri: 12pm - 8pm, Sat-Sun: Closed"
-    };
+function updateHours(city) { 
+    const openHours = {
+        city1: "Open: Monday-Friday: 8am-5pm",
+        city2: "Open: Tuesday-Saturday: 9am-4pm",
+        city3: "Open: Wednesday-Sunday: 10am-6pm"
+    }
+    const closedHours = {
+        city1: "Closed: Saturday-Sunday",
+        city2: "Closed: Sunday-Monday",
+        city3: "Closed: Monday-Tuesday"
+    }
+
+    document.getElementById("open").innerText = openHours[city];
+    document.getElementById("closed").innerText = closedHours[city];
+};
+
+function bistroStatus(localTime, city, cityName) {
+    if(localTime >= "08:00 AM" && localTime <= "05:00 PM" && city === "city1") {
+        document.getElementById("localTime").innerText = ` ${cityName[city]} Local Time: ${localTime} - Bistro is OPEN! ✅`;
+        document.getElementById("localTime").style.color = "green";
+        document.getElementById("localTime").style.fontWeight = "bold"; 
+    }
+    else if(localTime >= "09:00 AM" && localTime <= "04:00 PM" && city === "city2") {
+        document.getElementById("localTime").innerText = ` ${cityName[city]} Local Time: ${localTime} - Bistro is OPEN! ✅`;
+        document.getElementById("localTime").style.color = "green";
+        document.getElementById("localTime").style.fontWeight = "bold"; 
+    }
+    else if(localTime >= "10:00 AM" && localTime <= "06:00 PM" && city === "city3") {
+        document.getElementById("localTime").innerText = ` ${cityName[city]} Local Time: ${localTime} - Bistro is OPEN! ✅`;
+        document.getElementById("localTime").style.color = "green";
+        document.getElementById("localTime").style.fontWeight = "bold"; 
+    }
+    else {
+        document.getElementById("localTime").innerText = ` ${cityName[city]} Local Time: ${localTime} - Bistro is CLOSED! ❌`;
+        document.getElementById("localTime").style.color = "red";
+        document.getElementById("localTime").style.fontWeight = "bold"; 
+    }
+    
 }
